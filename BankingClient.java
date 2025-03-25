@@ -1,18 +1,22 @@
 import com.devgen.banking.model.Account;
-import com.devgen.banking.model.CurrentAccount;
-import com.devgen.banking.model.SavingAccount;
+import com.devgen.banking.model.AccountType;
+import com.devgen.banking.service.AccountService;
 
 public class BankingClient {
     public static void main(String[] args) {
 
-    Account savingAccountaccount = new SavingAccount(123456,500);
-        System.out.println("Account : "+ savingAccountaccount.getAccountNo() +" Account No : "+ savingAccountaccount.getBalance()+" Account Type : "+ savingAccountaccount.getAccountType());
+        AccountService accountService = new AccountService();
+        Long accountNumber =accountService.createAccount(3000, AccountType.SAVING);
 
-     Account currentAccount = new CurrentAccount(51422,2000);
+        Account account = accountService.getAccountNo(accountNumber);
+        System.out.println("Account : "+ account.getAccountNo() +" Account No : "+ account.getBalance()+" Account Type : "+ account.getAccountType());
 
-     CurrentAccount currentAccountRef = (CurrentAccount) currentAccount;
-     
-        System.out.println("Account : "+ savingAccountaccount.getAccountNo() +" Account No : "+ savingAccountaccount.getBalance()+" Account Type : "+ savingAccountaccount.getAccountType()+
-                " Overdraft Limit : "+currentAccountRef.getOverdraftLimit());
+
+         accountNumber =accountService.createAccount(5000, AccountType.SAVING);
+
+         account = accountService.getAccountNo(accountNumber);
+        System.out.println("Account : "+ account.getAccountNo() +" Account No : "+ account.getBalance()+" Account Type : "+ account.getAccountType());
+
+
     }
 }
